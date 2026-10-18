@@ -124,7 +124,7 @@ async function checkNewTikTokVideo(client) {
                 const logChannel = await client.channels.fetch(logChannelId).catch(() => null);
                 if (logChannel) {
                     await logChannel.send({
-                        content: `⚠️ **Erreur Notification TikTok** : Serveur indisponible. Toutes les instances ProxiTok sont actuellement en panne.`
+                        content: ``
                     }).catch(() => {});
                 }
             }
