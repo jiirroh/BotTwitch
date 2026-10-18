@@ -1,0 +1,27 @@
+{
+  "name": "bot_discord",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test:live": "node scripts/simulate_live.js",
+    "test:offline": "node scripts/simulate_offline.js",
+    "test:vod": "node scripts/simulate_vod.js",
+    "test:youtube": "node scripts/simulate_youtube.js",
+    "test:tiktok": "node scripts/simulate_tiktok.js",
+    "test:all": "node scripts/simulate_all.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.112.3",
+    "discord.js": "^14.27.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "rss-parser": "^3.13.0"
+  }
+}
