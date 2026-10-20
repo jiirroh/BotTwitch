@@ -6,8 +6,8 @@ const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID;
 const TWITCH_CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
 const TWITCH_CHANNEL_NAME = process.env.TWITCH_CHANNEL_NAME;
 
-const CHANNEL_NAME_ONLINE = process.env.LIVE_CHANNEL_NAME_ONLINE || '🔴・live';
-const CHANNEL_NAME_OFFLINE = process.env.LIVE_CHANNEL_NAME_OFFLINE || '⚫・offline';
+const CHANNEL_NAME_ONLINE = process.env.LIVE_CHANNEL_NAME_ONLINE || '🔴┆live';
+const CHANNEL_NAME_OFFLINE = process.env.LIVE_CHANNEL_NAME_OFFLINE || '⚫┆offline';
 
 let appAccessToken = null;
 let isLive = null; // null au démarrage pour forcer la synchronisation initiale
