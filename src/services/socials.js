@@ -118,16 +118,6 @@ async function checkNewTikTokVideo(client) {
         }
 
         if (!feed || !feed.items || feed.items.length === 0) {
-            // Le serveur ProxiTok est en panne, on prévient l'administration dans le salon des logs
-            const logChannelId = process.env.MODERATION_LOG_CHANNEL_ID || process.env.ADMIN_PLANNING_CHANNEL_ID || process.env.TIKTOK_NOTIFICATION_CHANNEL_ID;
-            if (logChannelId) {
-                const logChannel = await client.channels.fetch(logChannelId).catch(() => null);
-                if (logChannel) {
-                    await logChannel.send({
-                        content: ``
-                    }).catch(() => {});
-                }
-            }
             return; // Aucune instance n'a fonctionné ou aucun item trouvé
         }
 
