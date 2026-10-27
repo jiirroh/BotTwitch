@@ -11,6 +11,7 @@
     "test:youtube": "node scripts/simulate_youtube.js",
     "test:tiktok": "node scripts/simulate_tiktok.js",
     "test:all": "node scripts/simulate_all.js",
+    "test:planning-ping": "node scripts/simulate_planning_ping.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

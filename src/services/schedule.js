@@ -1,4 +1,4 @@
-const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const supabase = require('../config/supabase');
 
 const DAYS = [
@@ -180,12 +180,50 @@ function generateAdminSelectMenu() {
     return new ActionRowBuilder().addComponents(selectMenu);
 }
 
+/**
+ * Génère le bouton Ghost Ping pour le planning
+ */
+function generateAdminButtonRow() {
+    const pingButton = new ButtonBuilder()
+        .setCustomId('schedule_ghost_ping')
+        .setLabel('Ghost Ping Planning')
+        .setEmoji('📢')
+        .setStyle(ButtonStyle.Primary);
+
+    return new ActionRowBuilder().addComponents(pingButton);
+}
+
+/**
+ * Envoie un ghost ping (mention et suppression instantanée) dans le salon du planning public
+ */
+async function sendPlanningGhostPing(client) {
+    const channelId = process.env.PLANNING_PUBLIC_CHANNEL_ID;
+    const roleId = process.env.PLANNING_ROLE_ID || process.env.LIVE_ROLE_ID;
+
+    if (!channelId) return false;
+
+    try {
+        const channel = await client.channels.fetch(channelId);
+        if (!channel || !channel.isTextBased()) return false;
+
+        const pingContent = roleId ? `<@&${roleId}>` : `@everyone`;
+        const message = await channel.send(pingContent);
+        await message.delete();
+        return true;
+    } catch (error) {
+        console.error("Erreur lors de l'envoi du ghost ping planning:", error);
+        return false;
+    }
+}
+
 module.exports = {
     DAYS,
     generatePublicScheduleEmbed,
     updatePublicScheduleMessage,
     updateScheduleDay,
     generateAdminSelectMenu,
+    generateAdminButtonRow,
+    sendPlanningGhostPing,
     getPublicScheduleMessageId,
     setPublicScheduleMessageId
 };

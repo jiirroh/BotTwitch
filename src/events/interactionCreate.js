@@ -1,5 +1,5 @@
 const { Events, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder } = require('discord.js');
-const { DAYS, updateScheduleDay, updatePublicScheduleMessage } = require('../services/schedule');
+const { DAYS, updateScheduleDay, updatePublicScheduleMessage, sendPlanningGhostPing } = require('../services/schedule');
 const { hasAdminPermission } = require('../utils/permissions');
 
 module.exports = {
@@ -65,6 +65,29 @@ module.exports = {
                 );
 
                 await interaction.showModal(modal);
+            }
+        }
+        else if (interaction.isButton()) {
+            if (interaction.customId === 'schedule_ghost_ping') {
+                if (!hasAdminPermission(interaction.member)) {
+                    return interaction.reply({
+                        content: '❌ Vous n\'avez pas la permission d\'envoyer un ghost ping. Vous devez être Administrateur ou avoir le rôle autorisé.',
+                        ephemeral: true
+                    });
+                }
+
+                await interaction.deferReply({ ephemeral: true });
+
+                const success = await sendPlanningGhostPing(interaction.client);
+                if (success) {
+                    await interaction.editReply({
+                        content: '📢 **Ghost Ping envoyé !** Une notification a été envoyée et supprimée instantanément dans le salon planning public.'
+                    });
+                } else {
+                    await interaction.editReply({
+                        content: '❌ Impossible d\'envoyer le Ghost Ping. Vérifiez que `PLANNING_PUBLIC_CHANNEL_ID` est bien configuré et que le bot a les permissions nécessaires.'
+                    });
+                }
             }
         }
         else if (interaction.isModalSubmit()) {

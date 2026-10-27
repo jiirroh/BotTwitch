@@ -1,4 +1,4 @@
-# Bot Discord Twitch & Planning 
+﻿# Bot Discord Twitch & Planning 
 
 Ce projet est un bot Discord conçu pour gérer l'interaction communautaire avec Twitch et un planning interactif. Il intègre deux fonctionnalités principales :
 - **Un planning interactif permanent** synchronisé avec une base de données (Supabase) modifiable par les modérateurs.
@@ -23,7 +23,7 @@ Une fois le bot invité et en ligne sur votre serveur (assurez-vous qu'il possè
 **/setup**
 
 Cela va initialiser les différents modules du bot et envoyer automatiquement :
-- **Le panneau d'administration du planning** (Menu déroulant pour éditer le calendrier) dans votre salon d'administration.
+- **Le panneau d'administration du planning** (Menu déroulant pour éditer le calendrier + Bouton de Ghost Ping) dans votre salon d'administration.
 - **L'affichage du planning public** dans le salon communautaire.
 - **Le panneau de statut Live permanent** (qui change d'état lors du lancement du stream) dans le salon Twitch.
 

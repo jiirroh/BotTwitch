@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { generateAdminSelectMenu, generatePublicScheduleEmbed, setPublicScheduleMessageId } = require('../services/schedule');
+const { generateAdminSelectMenu, generateAdminButtonRow, generatePublicScheduleEmbed, setPublicScheduleMessageId } = require('../services/schedule');
 const { generateLiveEmbed, getOfflineThumbnail } = require('../services/twitch');
 const { hasAdminPermission } = require('../utils/permissions');
 const supabase = require('../config/supabase');
@@ -58,7 +58,8 @@ module.exports = {
                 .setColor('#2B2D31');
 
             const selectMenuRow = generateAdminSelectMenu();
-            await adminChannel.send({ embeds: [adminEmbed], components: [selectMenuRow] });
+            const buttonRow = generateAdminButtonRow();
+            await adminChannel.send({ embeds: [adminEmbed], components: [selectMenuRow, buttonRow] });
 
             await interaction.editReply({ content: '✅ Initialisation terminée avec succès ! Le message planning et le message live ont été créés.' });
 
